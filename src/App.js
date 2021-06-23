@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+
+import {Provider} from "react-redux"
+import Auth from "./components/Auth"
+import store from "./redux/store"
+import Task from "./components/Task"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SetAuthToken from "./redux/setAuthToken";
+import PrivateRoute from "./route/PrivateRoute";
 import './App.css';
 
 function App() {
+
+  if (localStorage.token) {
+    SetAuthToken(localStorage.token)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+
+     <Router>
+        <Switch>
+          <PrivateRoute exact path='/' component={Task} />      
+          <Route exact path='/login' component={Auth} /> 
+         
+        </Switch>
+     </Router>
+     </Provider>
   );
 }
 
