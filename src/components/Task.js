@@ -10,7 +10,7 @@ const Task = () => {
     const current = useSelector(state => state.loginReducer?.selectedTask)
     const users = useSelector(state => state?.loginReducer?.user?.results?.data)
     
-    const loading = useSelector(state => state?.loginReducer?.loading)
+    //const loading = useSelector(state => state?.loginReducer?.loading)
 
     const dispatch = useDispatch()
     
